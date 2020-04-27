@@ -55,6 +55,9 @@ Model summary
 The overall accuracy is at level of 70%, with sensitivity different in different clasess waving from 50% up to 85% and specificity in range of 72% - 100%.
 With such properties, the modal can be treated as clue, but not as an evidence in any court case.
 
+
+All files, ui.R, server.R and this presentation are in the following repository:
+https://github.com/bartriman/DataProducts_week4
 <!-- ```{r } -->
 <!-- options(scipen = 999) -->
 <!-- model.summary$overall -->
