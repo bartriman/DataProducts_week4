@@ -1,0 +1,61 @@
+Glass type recognition
+========================================================
+author: Bartek Bielski
+date: 2020-04-26
+autosize: true
+transition: rotate
+
+The study of classification of **types of glass** was motivated by criminological investigation. 
+At the scene of the crime, the glass left can be used as evidence, if it is correctly identified. 
+
+The data set was created by B. German at Central Research Establishment Home Office Forensic Science Service in UK. This institution (FSS) was a government-owned company in the United Kingdom which provided forensic science services to the police forces and government agencies of England and Wales, as well as other countries.
+
+
+Dataset description (1)
+========================================================
+The dataset consists of 214 observations, with 9 variables (unit measurement: weight percent in corresponding oxide, as are attributes 4-10) and type of glass code. 
+```{r}
+library(mlbench)
+data(Glass)
+summary(Glass)
+```
+
+Dataset description (2)
+========================================================
+The Types of glass: (class attribute)
+* building_windows_float_processed (1)
+* uilding_windows_non_float_processed (2)
+* vehicle_windows_float_processed (3)
+* vehicle_windows_non_float_processed (4) (none in this database)
+* containers (5)
+* tableware (6)
+* headlamps (7)
+
+
+
+Mashine learning algorithm used in recognition model
+========================================================
+
+As glass recognition is typical classification problem, the `random forest` algorithm seems to be apriopriate. For presentation purposes the code for building the model was  with "light" settings. In shiny app, the model was calculated with more advanced options.
+```{r eval=FALSE, paged.print=TRUE}
+require("mlbench") # Glass dataset is there
+library(mlbench)
+library(caret)
+set.seed(56789)
+data(Glass)
+trainIndex <- createDataPartition(Glass$Type, p=0.7, list=FALSE); trainData <- Glass[trainIndex,];testData <- Glass[-trainIndex,]
+rf <- train(data=trainData, Type ~ ., method = "rf", metric="Accuracy")
+tres <- predict(rf, newdata = testData)
+model.summary <- confusionMatrix(tres, testData$Type)
+
+```
+
+Model summary
+========================================================
+The overall accuracy is at level of 70%, with sensitivity different in different clasess waving from 50% up to 85% and specificity in range of 72% - 100%.
+With such properties, the modal can be treated as clue, but not as an evidence in any court case.
+
+<!-- ```{r } -->
+<!-- options(scipen = 999) -->
+<!-- model.summary$overall -->
+<!-- ``` -->
