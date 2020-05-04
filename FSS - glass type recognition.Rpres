@@ -1,18 +1,30 @@
 Glass type recognition
 ========================================================
+class: sildes section
 author: Bartek Bielski
 date: 2020-04-26
 autosize: true
 transition: rotate
 
+<style>
+.small-code pre code {
+  font-size: 1em;
+  .reveal .slides section .slideContent{
+    font-size: 80pt;
+}
+}
+</style>
+
 The study of classification of **types of glass** was motivated by criminological investigation. 
 At the scene of the crime, the glass left can be used as evidence, if it is correctly identified. 
 
-The data set was created by B. German at Central Research Establishment Home Office Forensic Science Service in UK. This institution (FSS) was a government-owned company in the United Kingdom which provided forensic science services to the police forces and government agencies of England and Wales, as well as other countries.
+The data set was created by B. German at Central Research Establishment Home Office Forensic Science Service in UK. The application is supposed to recognize the type of glass, on basis of user input (chemical test results of a sample). Typical vector with glass sample chemical test results is:
+*(1.51, 13.00, 3.5, 2, 72, 0.6, 8, 0, 0.1)*
 
 
 Dataset description (1)
 ========================================================
+class: small-code
 The dataset consists of 214 observations, with 9 variables (unit measurement: weight percent in corresponding oxide, as are attributes 4-10) and type of glass code. 
 ```{r}
 library(mlbench)
@@ -22,6 +34,7 @@ summary(Glass)
 
 Dataset description (2)
 ========================================================
+class: small-code
 The Types of glass: (class attribute)
 * building_windows_float_processed (1)
 * uilding_windows_non_float_processed (2)
@@ -35,6 +48,7 @@ The Types of glass: (class attribute)
 
 Mashine learning algorithm used in recognition model
 ========================================================
+class: small-code
 
 As glass recognition is typical classification problem, the `random forest` algorithm seems to be apriopriate. For presentation purposes the code for building the model was  with "light" settings. In shiny app, the model was calculated with more advanced options.
 ```{r eval=FALSE, paged.print=TRUE}
